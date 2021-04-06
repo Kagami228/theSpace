@@ -22,7 +22,7 @@ class Ship : public IGameElement {
     int health = 350;
     Sprite _sprite;
 public:
-    double wx, hy=y;
+    double hy=y;
 
     Ship(RenderWindow& w) :_window(w) {
         _texture.loadFromFile("res/ship.png");
@@ -35,11 +35,9 @@ public:
     }
 
     void MoveLeft() override {
-        wx = x + w / 2;
         _sprite.move(-15, 0);
     }
     void MoveRight() override {
-         wx = x + w / 2;
         _sprite.move(15, 0);
         auto pos = _sprite.getPosition();
     }
@@ -65,6 +63,7 @@ class Enemy : public IGameElement {
     Sprite _sprite;
 public:
     double _x,_y;
+    Enemy();
     Enemy(RenderWindow& w, int i, int j) :_window(w) {
         _texture.loadFromFile("res/enemy.png");
         _sprite.setTexture(_texture);
@@ -98,12 +97,33 @@ public:
 
 
 
-class Boss : public Enemy {
+class Boss :public IGameElement {
     bool special_skill;
+    int damage = 10, w = 5, h = 5, health = 50,_y=100;
+    RenderWindow& _window;
+    Texture _texture;
+    Sprite _sprite;
 public:
     Texture texture_boss;
     Sprite sprite_boss;
-    Boss();
+    Boss(RenderWindow& w) :_window(w){
+        _texture.loadFromFile("res/boss.png");
+        _sprite.setTexture(_texture);
+        _sprite.setPosition(500, _y);
+    }
+
+    void MoveLeft() override{}
+    void MoveRight() override{}
+    void MoveTop() override{}
+
+    void MoveDown() override {
+        _y = _y + 0.01;
+        _sprite.move(0, 0.001);
+    }
+    void Draw() override {
+        _window.draw(_sprite);
+    }
+
 };
 
 static void updateGameOverLabel(sf::Text& label, const std::string& text)
@@ -125,7 +145,7 @@ int main()
 
     Ship s(window);
     Enemy en(window, 4, 4);
-   
+    Boss bs(window);
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
@@ -136,11 +156,12 @@ int main()
             else if (event.key.code == Keyboard::Right) s.MoveRight();
         }
         en.MoveDown();
-
+        bs.MoveDown();
         window.clear(Color::White);
         if (en.died(s) == "die") {
             break;
         }
+        bs.Draw();
         en.Draw();
         s.Draw();
         window.display();

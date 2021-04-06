@@ -142,6 +142,7 @@
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\boss.png" />
     <Image Include="res\enemy.png" />
     <Image Include="res\game_over.jpg" />
     <Image Include="res\ship.png" />
