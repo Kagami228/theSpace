@@ -74,20 +74,15 @@ public:
     }
 
     void shots();
-    void MoveLeft() override {
-        _sprite.move(-15, 0);
-    }
-    void MoveRight() override {
-        _sprite.move(15, 0);
-        auto pos = _sprite.getPosition();
-    }
-    void MoveTop() override {
+    void MoveLeft() override {}
+    void MoveRight() override {}
+    void MoveTop() override {}
 
-    }
     void MoveDown() override {
         _y= _y + 0.01;
         _sprite.move(0, 0.01);
     }
+
     void Draw() override {
         _window.draw(_sprite);
     }
