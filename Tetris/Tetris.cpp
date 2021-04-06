@@ -98,7 +98,8 @@ public:
 
 
 class Boss :public IGameElement {
-    bool special_skill;
+    int special_skill[5] = { 1,2,3,4,5 };
+    int ssll;
     int damage = 10, w = 5, h = 5, health = 50,_y=100;
     RenderWindow& _window;
     Texture _texture;
@@ -106,7 +107,7 @@ class Boss :public IGameElement {
 public:
     Texture texture_boss;
     Sprite sprite_boss;
-    Boss(RenderWindow& w) :_window(w){
+    Boss(RenderWindow& w,int i) :_window(w),ssll(special_skill[i]){
         _texture.loadFromFile("res/boss.png");
         _sprite.setTexture(_texture);
         _sprite.setPosition(500, _y);
@@ -145,7 +146,7 @@ int main()
 
     Ship s(window);
     Enemy en(window, 4, 4);
-    Boss bs(window);
+    Boss bs(window,3);
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
