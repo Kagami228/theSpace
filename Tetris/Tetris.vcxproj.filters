@@ -26,5 +26,8 @@
     <Image Include="res\enemy.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\game_over.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

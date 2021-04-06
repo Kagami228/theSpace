@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\enemy.png" />
+    <Image Include="res\game_over.jpg" />
     <Image Include="res\ship.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

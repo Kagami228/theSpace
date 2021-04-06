@@ -117,12 +117,15 @@ std::vector<Enemy> enemys;
 int main()
 {
     srand(time(0));
-
+    Texture textureGame_over;
+    textureGame_over.loadFromFile("res/game_over.jpg");
+    Sprite spriteGame_over(textureGame_over);
     RenderWindow window(VideoMode(1000, 600), "The Game!");
     // Создание и загрузка текстуры
 
     Ship s(window);
     Enemy en(window, 4, 4);
+   
     while (window.isOpen()) {
         Event event;
         while (window.pollEvent(event)) {
@@ -135,12 +138,22 @@ int main()
         en.MoveDown();
 
         window.clear(Color::White);
-        window.setTitle(en.died(s));
+        if (en.died(s) == "die") {
+            break;
+        }
         en.Draw();
         s.Draw();
         window.display();
-
     }
-
+    Clock clock;
+    while (window.isOpen()){
+        Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == Event::Closed)
+                window.close();
+        }
+        window.draw(spriteGame_over);
+        window.display();
+    }
     return 0;
 }
