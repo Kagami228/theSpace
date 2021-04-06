@@ -124,7 +124,7 @@ int main()
     srand(time(0));
 
     RenderWindow window(VideoMode(1000, 600), "The Game!");
-    // Создание и загрузка текстуры
+    // РЎРѕР·РґР°РЅРёРµ Рё Р·Р°РіСЂСѓР·РєР° С‚РµРєСЃС‚СѓСЂС‹
 
     Ship s(window);
     Enemy en(window, 4, 4);
