@@ -19,10 +19,10 @@ class Ship : public IGameElement {
     const int w = 10, h = 10, damage = 50;
     int x = 450;
     int y = 500;
-    int health = 350,h_y = y - h / 2;
+    int health = 350;
     Sprite _sprite;
 public:
-    double wx, w_x;
+    double wx, hy=y;
 
     Ship(RenderWindow& w) :_window(w) {
         _texture.loadFromFile("res/ship.png");
@@ -35,11 +35,11 @@ public:
     }
 
     void MoveLeft() override {
-        w_x = x - w / 2, wx = x + w / 2;
+        wx = x + w / 2;
         _sprite.move(-15, 0);
     }
     void MoveRight() override {
-        w_x = x - w / 2, wx = x + w / 2;
+         wx = x + w / 2;
         _sprite.move(15, 0);
         auto pos = _sprite.getPosition();
     }
@@ -85,7 +85,7 @@ public:
 
     }
     void MoveDown() override {
-        _x= _x + 0.01;
+        _y= _y + 0.01;
         _sprite.move(0, 0.01);
     }
     void Draw() override {
@@ -93,7 +93,7 @@ public:
     }
     std::string died(Ship &s) {
         std::string str="";
-        if (_x > s.wx) {
+        if (_y+100> s.hy) {
             str = "die";
             return str;
         }
