@@ -141,7 +141,7 @@ int main()
     Texture textureGame_over;
     textureGame_over.loadFromFile("res/game_over.jpg");
     Sprite spriteGame_over(textureGame_over);
-    RenderWindow window(VideoMode(1000, 600), "The Game!");
+    RenderWindow window(VideoMode(1800, 900), "The Game!");
     // Создание и загрузка текстуры
 
     Ship s(window);
