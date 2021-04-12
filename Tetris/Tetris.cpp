@@ -1,18 +1,9 @@
-#include <SFML/Graphics.hpp>
-#include <time.h>
-#include <stdlib.h>
-#include "Ship.h"
-#include "Enemy.h"
-#include "Boss.h"
-#include "Shoot.h"
+#include "Header.h"
 
 
 using namespace sf;
 
 
-std::vector<Shoot> all_shoots;
-
-std::vector<Enemy> enemys;
 
 int main()
 {
@@ -24,9 +15,8 @@ int main()
     Sprite spriteGame_over(textureGame_over);
     RenderWindow window(VideoMode(1800, 900), "The Game!");
     // Создание и загрузка текстуры
-    Ship s(window);
-    int i,j;
-
+    Ship s(window);//корабль 
+    int ij,ji,rnd;
     Enemy en(window, 4, 4);
     enemys.push_back(en);
     clock_t clock1;
@@ -39,16 +29,29 @@ int main()
             if (event.type == Event::KeyPressed) {}
             else if (event.key.code == Keyboard::Left) s.MoveLeft();
             else if (event.key.code == Keyboard::Right) s.MoveRight();
+            else if (event.key.code == Keyboard::B) s.Shot(all_shoots);
         }
-
-        window.clear(Color::Blue);
+    
+        window.clear(Color::Black);
         clock1 = clock();
-        if ((clock1)%400 == 0) {
-            i = rand() % 34;
-            j = rand() % 11;
-            Enemy en(window, x[i], y[j]);
+        if ((clock1)%1000 == 0) {
+            ij = rand() % 34;
+            ji = rand() % 11;
+            Enemy en(window, x[ij], y[ji]);
             enemys.push_back(en);
         }
+        else if ((clock1) % 350 == 0) {
+            int rr = rand() % 5;
+            for (int il = 0; il < rr; il++) {
+                rnd = rand() % enemys.size();
+                enemys[rnd].Shot(all_shoots);
+            }
+        }
+        for (int i = 0; i < all_shoots.size(); i++) {
+            all_shoots[i].Move();
+            all_shoots[i].Draw();
+        }
+
         for (int c = 0; c < enemys.size(); c++) {
             enemys[c].MoveDown();
             enemys[c].Draw();
@@ -65,9 +68,7 @@ int main()
                 }
             }
         }
-        for (int c = 0; c < all_shoots.size(); c++) {
-        
-        }
+
         bs.MoveDown();
         bs.Draw();
         s.Draw();

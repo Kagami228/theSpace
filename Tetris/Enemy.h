@@ -1,13 +1,12 @@
-#include <SFML/Graphics.hpp>
-#include <time.h>
-#include <stdlib.h>
-#include "IGameElement.h"
-#include "Ship.h"
+#pragma once
+
+#include "Header.h"
+
 using namespace sf;
 
 class Enemy : public IGameElement {
     int damage = 10, w = 5, h = 5, health = 50;
-    const int b = -1;
+    const int b = 1;
     RenderWindow& _window;
     //Texture _texture;
     CircleShape _circle;
@@ -26,14 +25,17 @@ public:
         _y = j;
     }
 
-    void Shots();
+    void Shot(std::vector<Shoot>& all) {
+        Shoot sh(_window, damage, 0.25, b, _x, _y);
+        all.push_back(sh);
+    }
     void MoveLeft() override {}
     void MoveRight() override {}
     void MoveTop() override {}
 
     void MoveDown() override {
-        _y = _y + 0.1;
-        _circle.move(0, 0.1);
+        _y = _y + 0.01;
+        _circle.move(0, 0.01);
     }
 
     void Draw() override {
@@ -41,7 +43,7 @@ public:
     }
     std::string died(Ship& s) {
         std::string str = "";
-        if (_y + 100 > s.hy) {
+        if (_y + 10 > s.hy) {
             str = "die";
             return str;
         }

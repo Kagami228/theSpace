@@ -1,8 +1,6 @@
-#include <SFML/Graphics.hpp>
-#include <time.h>
-#include <stdlib.h>
-#include "Ship.h"
-#include "Enemy.h"
+#pragma once
+#include "Header.h"
+
 
 
 using namespace sf;
@@ -10,7 +8,7 @@ using namespace sf;
 class Boss :public IGameElement {
     int special_skill[5] = { 1,2,3,4,5 };
     int ssll;
-    const int b = -1;
+    const int b = 1;
     int damage = 10, w = 5, h = 5, health = 50, _y = 100, _x = 500;
     RenderWindow& _window;
     CircleShape _circle;

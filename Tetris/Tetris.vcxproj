@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Class.cpp" />
     <ClCompile Include="Tetris.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,7 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="Class.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="IGameElement.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Shoot.h" />
