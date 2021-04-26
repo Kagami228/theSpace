@@ -1,18 +1,18 @@
 #pragma once
 #include "Header.h"
-
 using namespace sf;
 
 class Shoot :public IGameElement {
-    double  _x, _y,speed;
-    int damege;
-    int actor;
+    double speed;
     RenderWindow& _window;
     CircleShape _circle;
     RectangleShape _rectangle;
 
 public:
-    Shoot(RenderWindow& w,int d, double s, int b, double x, double y) :_window(w),damege(d), speed(s), _rectangle(Vector2f(10.f, 5.f)), _y(y) {
+    int actor;
+    int damege;
+    double  _x, _y;
+    Shoot(RenderWindow& w,int d, double s, int b, double x, double y):_window(w),damege(d), speed(s), _rectangle(Vector2f(10.f, 5.f)), _y(y){
         if (b == -1) {
             _rectangle.setFillColor(Color(80, 220, 50));
             actor = b;
@@ -33,10 +33,8 @@ public:
         _y = _y + speed * actor;
         _rectangle.move(0, speed * actor);
     }
-    void Colision() {
-
-    }
     void Draw() override {
         _window.draw(_rectangle);
     }
+    Shoot(const Shoot&) = delete;
 };

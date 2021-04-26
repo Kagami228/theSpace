@@ -5,14 +5,16 @@
 using namespace sf;
 
 class Enemy : public IGameElement {
-    int damage = 10, w = 5, h = 5, health = 50;
-    const int b = 1;
+    const int actor = 1;
     RenderWindow& _window;
     //Texture _texture;
     CircleShape _circle;
     //Sprite _sprite;
 public:
+    int  health = 200;
+    int damage = 50, w = 5, h = 5;
     double _x, _y;
+    int score = 100;
     //Enemy();
     Enemy(RenderWindow& w, int i, int j) :_window(w), _circle(15.f) {
 
@@ -25,8 +27,8 @@ public:
         _y = j;
     }
 
-    void Shot(std::vector<Shoot>& all) {
-        Shoot sh(_window, damage, 0.25, b, _x, _y);
+    void Shot(std::vector<Shoot*>& all) {
+        auto sh = new Shoot(_window, damage, 0.25, actor, _x, _y);
         all.push_back(sh);
     }
     void MoveLeft() override {}
@@ -34,19 +36,11 @@ public:
     void MoveTop() override {}
 
     void MoveDown() override {
-        _y = _y + 0.01;
-        _circle.move(0, 0.01);
+        _y = _y + 0.04;
+        _circle.move(0, 0.04);
     }
 
     void Draw() override {
         _window.draw(_circle);
-    }
-    std::string died(Ship& s) {
-        std::string str = "";
-        if (_y + 10 > s.hy) {
-            str = "die";
-            return str;
-        }
-        return "Play";
     }
 };

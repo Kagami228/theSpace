@@ -7,14 +7,13 @@ using namespace sf;
 class Ship : public IGameElement {
     RenderWindow& _window;
     Texture _texture;
-
-    const int w = 10, h = 10, damage = 50, b = -1;
-    int x = 450;
-    int y = 800;
-    int health = 350;
     Sprite _sprite;
 public:
-    double hy = y;
+    const int  damage = 50, actor = -1;
+    int x = 450;
+    int y = 700;
+   // double hy = y;
+    int health = 500;
 
     Ship(RenderWindow& w) :_window(w) {
         _texture.loadFromFile("res/ship.png");
@@ -22,8 +21,8 @@ public:
         _sprite.setPosition(x, y);
     }
     ~Ship() {}
-    void Shot(std::vector<Shoot>& all) {
-        Shoot sh(_window, damage, 0.5, b, x, y);
+    void Shot(std::vector<Shoot*>& all) {
+        auto sh = new Shoot (_window, damage, 0.5, actor, x, y);
         all.push_back(sh);
     }
 
@@ -34,7 +33,7 @@ public:
     void MoveRight() override {
         x = x + 10;
         _sprite.move(10, 0);
-        auto pos = _sprite.getPosition();
+        //auto pos = _sprite.getPosition();
     }
     void MoveTop() override {
 
