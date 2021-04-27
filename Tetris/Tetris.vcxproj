@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{d5bcef8c-4cdf-4262-8c27-bcfc5c319c36}</ProjectGuid>
-    <RootNamespace>Tetris</RootNamespace>
+    <RootNamespace>SpaceWar</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>SpaceWar</ProjectName>
   </PropertyGroup>
