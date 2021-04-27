@@ -3,7 +3,7 @@
 using namespace sf;
 bool dieen = false;
 int count = 0;
-
+//ENEMYYY
 bool ColisionShip_damage_to_enemy(Enemy &e,Shoot &s) {
     if (s._x >=(e._x-5) and s._x <=(e._x+25) and (s._y<=e._y+25)) {
         return true;
@@ -18,23 +18,24 @@ bool heal_enemy_0( Shoot& s, Enemy& e) {
     }
     return false;
 }
-bool ColisionShip_damage_to_boss(Boss& b, Shoot& s) {
-    if (s._x >= (b._x - 5) and s._x <= (b._x + 25) and (b._y <= b._y + 25)) {
+//BOSSSYYY
+bool ColisionShip_damage_to_boss(Boss& e, Shoot& s) {
+    if (s._x >= (e._x - 10) and s._x <= (e._x + 50) and (s._y <= e._y + 25)) {
         return true;
     }
     return false;
 }
 
-bool heal_boss_0(Shoot& s, Boss& b) {
-    b.health = b.health - s.damege;
-    if (b.health == 0) {
+bool heal_boss_0(Shoot& s, Boss& e) {
+    e.health = e.health - s.damege;
+    if (e.health == 0) {
         return true;
     }
     return false;
 }
-
+//SHIIIIP
 bool ColisionShip_damage_to_ship(Ship& sh, Shoot& s) {
-    if (s._x >= (sh.x) and s._x <= (sh.x + 100) and (s._y >= sh.y )and (s._y <= sh.y +10)) {
+    if (s._x >= (sh.x) and s._x <= (sh.x + 50) and (s._y >= sh.y )and (s._y <= sh.y +100)) {
         return true;
     }
     return false;
@@ -50,8 +51,12 @@ bool heal_ship_0(Shoot& s, Ship& e) {
 
 int main() {
     srand(time(NULL));
+    int heal[13] = {500,700,500,700,800,900,100,1400,1800,2000,2500,3000,3700};
     int x[21] = { 110,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000,1050,1100};
     int y[11] = { 10,20,30,40,50,55,60,100,80,90,70 };
+    int b_y[3] = {100,70,130};
+    int b_x[3] = {300,600,900};
+
     int score = 0;
     Texture textureGame_over;
     textureGame_over.loadFromFile("res/game_over.jpg");
@@ -88,12 +93,12 @@ int main() {
        // bossy[0]->Draw();
         //
 
-        if ((clock1) % 400 == 0) {
+        if ((clock1) % 850 == 0) {
             ij = rand() % 21;
             ji = rand() % 11;
             auto en = new Enemy(window, x[ij], y[ji]);
             enemys.push_back(en);
-        }if ((clock1) % 450 == 0) {
+        }if ((clock1) % 550 == 0) {
             int rr = rand() % 5;
             if (enemys.size() != 0) {
                 for (int il = 0; il < rr; il++) {
@@ -101,7 +106,7 @@ int main() {
                     enemys[rnd]->Shot(all_shoots);
                 }
             }
-        }if ((clock1) % 500 == 0) {
+        }if ((clock1) % 700 == 0) {
             for (int l = 0; l < bossy.size(); l++) {
                 bossy[l]->Shot(all_shoots);
             }
@@ -149,6 +154,27 @@ int main() {
                     shoo = all_shoots.erase(shoo);
                     // break;
                 }
+            }for (auto byboss = bossy.begin(); byboss != bossy.end(); byboss++) {
+                if ((*byboss)->_y > 800) {
+                    score = (*byboss)->difscore;
+                    delete* byboss;
+                    byboss = bossy.erase(byboss);
+                }if ((**shoo).actor == -1) {
+                    if (ColisionShip_damage_to_boss(**byboss, **shoo)) {
+                        if (heal_boss_0(**shoo, **byboss)) {
+                            score = score + (*byboss)->score;
+                            delete* byboss;
+                            byboss = bossy.erase(byboss);
+                        }
+                        delete* shoo;
+                        shoo = all_shoots.erase(shoo);
+                        break;
+                    }
+                }
+                if (byboss == bossy.end()) {
+                    break;
+                }
+
             }
             for (auto e = enemys.begin(); e != enemys.end(); e++) {
                 if ((*e)->_y > 800) {
@@ -175,9 +201,12 @@ int main() {
             }
         }
 
-        if (score % 200 == 0 and bossy.size() == 0 and score > 0) {
+        if (score % 700 == 0 and bossy.size() == 0 and score > 0) {
             int k = rand() % 3;
-            auto bbos = new Boss(window,k);
+            int xb = rand() % 3;
+            int yb = rand() % 3;
+            int hb = rand() % 13;
+            auto bbos = new Boss(window,k,b_x[xb],b_y[yb],heal[hb]);
             bossy.push_back(bbos);
         }
         
