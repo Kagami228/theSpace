@@ -93,12 +93,12 @@ int main() {
        // bossy[0]->Draw();
         //
 
-        if ((clock1) % 850 == 0) {
+        if ((clock1) % 550 == 0) {
             ij = rand() % 21;
             ji = rand() % 11;
             auto en = new Enemy(window, x[ij], y[ji]);
             enemys.push_back(en);
-        }if ((clock1) % 550 == 0) {
+        }if ((clock1) % 450 == 0) {
             int rr = rand() % 5;
             if (enemys.size() != 0) {
                 for (int il = 0; il < rr; il++) {
@@ -106,7 +106,7 @@ int main() {
                     enemys[rnd]->Shot(all_shoots);
                 }
             }
-        }if ((clock1) % 700 == 0) {
+        }if ((clock1) % 500 == 0) {
             for (int l = 0; l < bossy.size(); l++) {
                 bossy[l]->Shot(all_shoots);
             }
